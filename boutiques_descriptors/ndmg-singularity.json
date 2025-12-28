@@ -1,0 +1,197 @@
+{
+    "command-line": "ndmg_pipeline [DTI] [BVAL] [BVEC] [MPRAGE] [ATLAS] [MASK] [OUTDIR] [PARCELLATIONS] [CLEAN]",
+    "container-image": {
+        "image": "bids/ndmg:v0.1.0",
+        "index": "shub://",
+        "type": "singularity"
+    },
+    "description": "dwi connectome estimation pipeline",
+    "inputs": [
+        {
+            "id": "dti_file",
+            "name": "Diffusion Tensor Image",
+            "optional": false,
+            "type": "File",
+            "value-key": "[DTI]"
+        },
+        {
+            "id": "bval_file",
+            "name": "B-values file",
+            "optional": false,
+            "type": "File",
+            "value-key": "[BVAL]"
+        },
+        {
+            "id": "bvec_file",
+            "name": "Gradient vectors file",
+            "optional": false,
+            "type": "File",
+            "value-key": "[BVEC]"
+        },
+        {
+            "id": "mprage_file",
+            "name": "Structural scan file",
+            "optional": false,
+            "type": "File",
+            "value-key": "[MPRAGE]"
+        },
+        {
+            "default-value": "/ndmg_atlases/atlas/MNI152_T1_1mm.nii.gz",
+            "id": "atlas",
+            "name": "Atlas image (MNI152)",
+            "optional": false,
+            "type": "String",
+            "value-choices": [
+                "/ndmg_atlases/atlas/MNI152_T1_1mm.nii.gz"
+            ],
+            "value-key": "[ATLAS]"
+        },
+        {
+            "default-value": "/ndmg_atlases/atlas/MNI152_T1_1mm_brain_mask.nii.gz",
+            "id": "mask",
+            "name": "Atlas brain mask",
+            "optional": false,
+            "type": "String",
+            "value-choices": [
+                "/ndmg_atlases/atlas/MNI152_T1_1mm_brain_mask.nii.gz"
+            ],
+            "value-key": "[MASK]"
+        },
+        {
+            "id": "outdir",
+            "name": "Output directory",
+            "optional": false,
+            "type": "String",
+            "value-key": "[OUTDIR]"
+        },
+        {
+            "id": "parcellations",
+            "list": true,
+            "name": "Parcellations to use",
+            "optional": false,
+            "type": "String",
+            "min-list-entries": 1,
+            "value-choices": [
+                "/ndmg_atlases/labels/AAL.nii.gz",
+                "/ndmg_atlases/labels/CPAC200.nii.gz",
+                "/ndmg_atlases/labels/DS00071.nii.gz",
+                "/ndmg_atlases/labels/DS00096.nii.gz",
+                "/ndmg_atlases/labels/DS00108.nii.gz",
+                "/ndmg_atlases/labels/DS00140.nii.gz",
+                "/ndmg_atlases/labels/DS00195.nii.gz",
+                "/ndmg_atlases/labels/DS00278.nii.gz",
+                "/ndmg_atlases/labels/DS00350.nii.gz",
+                "/ndmg_atlases/labels/DS00446.nii.gz",
+                "/ndmg_atlases/labels/DS00583.nii.gz",
+                "/ndmg_atlases/labels/DS00833.nii.gz",
+                "/ndmg_atlases/labels/DS01216.nii.gz",
+                "/ndmg_atlases/labels/DS01876.nii.gz",
+                "/ndmg_atlases/labels/DS03231.nii.gz",
+                "/ndmg_atlases/labels/DS06481.nii.gz",
+                "/ndmg_atlases/labels/DS16784.nii.gz",
+                "/ndmg_atlases/labels/DS72784.nii.gz",
+                "/ndmg_atlases/labels/Desikan2012.nii.gz",
+                "/ndmg_atlases/labels/HarvardOxford.nii.gz",
+                "/ndmg_atlases/labels/JHU.nii.gz",
+                "/ndmg_atlases/labels/Talairach.nii.gz"
+            ],
+            "value-key": "[PARCELLATIONS]"
+        },
+        {
+            "command-line-flag": "-c",
+            "id": "clean",
+            "name": "Clean-up flag",
+            "optional": true,
+            "type": "Flag",
+            "value-key": "[CLEAN]"
+        }
+    ],
+    "invocation-schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "additionalProperties": false,
+        "dependencies": {},
+        "description": "Invocation schema for ndmg.",
+        "properties": {
+            "atlas": {
+                "enum": [
+                    "/ndmg_atlases/atlas/MNI152_T1_1mm.nii.gz"
+                ]
+            },
+            "bval_file": {
+                "type": "string"
+            },
+            "bvec_file": {
+                "type": "string"
+            },
+            "clean": {
+                "type": "boolean"
+            },
+            "dti_file": {
+                "type": "string"
+            },
+            "mask": {
+                "enum": [
+                    "/ndmg_atlases/atlas/MNI152_T1_1mm_brain_mask.nii.gz"
+                ]
+            },
+            "mprage_file": {
+                "type": "string"
+            },
+            "outdir": {
+                "type": "string"
+            },
+            "parcellations": {
+                "enum": [
+                        "/ndmg_atlases/labels/AAL.nii.gz",
+                        "/ndmg_atlases/labels/CPAC200.nii.gz",
+                        "/ndmg_atlases/labels/DS00071.nii.gz",
+                        "/ndmg_atlases/labels/DS00096.nii.gz",
+                        "/ndmg_atlases/labels/DS00108.nii.gz",
+                        "/ndmg_atlases/labels/DS00140.nii.gz",
+                        "/ndmg_atlases/labels/DS00195.nii.gz",
+                        "/ndmg_atlases/labels/DS00278.nii.gz",
+                        "/ndmg_atlases/labels/DS00350.nii.gz",
+                        "/ndmg_atlases/labels/DS00446.nii.gz",
+                        "/ndmg_atlases/labels/DS00583.nii.gz",
+                        "/ndmg_atlases/labels/DS00833.nii.gz",
+                        "/ndmg_atlases/labels/DS01216.nii.gz",
+                        "/ndmg_atlases/labels/DS01876.nii.gz",
+                        "/ndmg_atlases/labels/DS03231.nii.gz",
+                        "/ndmg_atlases/labels/DS06481.nii.gz",
+                        "/ndmg_atlases/labels/DS16784.nii.gz",
+                        "/ndmg_atlases/labels/DS72784.nii.gz",
+                        "/ndmg_atlases/labels/Desikan2012.nii.gz",
+                        "/ndmg_atlases/labels/HarvardOxford.nii.gz",
+                        "/ndmg_atlases/labels/JHU.nii.gz",
+                        "/ndmg_atlases/labels/Talairach.nii.gz"
+                 ]
+            }
+        },
+        "required": [
+            "dti_file",
+            "bval_file",
+            "bvec_file",
+            "mprage_file",
+            "atlas",
+            "mask",
+            "outdir",
+            "parcellations"
+        ],
+        "title": "ndmg.invocationSchema",
+        "type": "object"
+    },
+    "name": "ndmg",
+    "output-files": [
+        {
+            "id": "output_directory",
+            "name": "Output directory containing graphs, fibers, tensors, and aligned volumes",
+            "optional": true,
+            "path-template": "[OUTDIR]"
+        }
+    ],
+    "schema-version": "0.5",
+    "suggested-resources": {
+        "walltime-estimate": 7400
+    },
+    "tool-version": "v0.0.50s"
+}
